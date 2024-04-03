@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../application/paginated_items_notifier.dart';
@@ -35,7 +33,6 @@ class PaginationView<T> extends StatelessWidget {
             final limit =
                 metrics.maxScrollExtent - metrics.viewportDimension / 3;
             if (canLoadNextPage && metrics.pixels >= limit) {
-              log("lol");
               getNextPage(ref);
             }
             return false;

@@ -12,6 +12,7 @@ class Repo with _$Repo {
     required String name,
     required String description,
     required int stargazersCount,
+    required DateTime updatedAt,
   }) = _Repo;
 
   String get fullName => '${owner.name}/$name';

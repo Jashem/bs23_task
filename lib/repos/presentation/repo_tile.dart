@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/presentation/routes/app_router.dart';
 import '../domain/repo.dart';
 
 class RepoTile extends StatelessWidget {
@@ -39,7 +41,9 @@ class RepoTile extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {},
+      onTap: () {
+        context.pushRoute(RepoDetailsRoute(repo: repo));
+      },
     );
   }
 }

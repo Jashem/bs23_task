@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    RepoDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<RepoDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RepoDetailsPage(
+          key: args.key,
+          repo: args.repo,
+        ),
+      );
+    },
     ReposRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -28,6 +38,44 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [RepoDetailsPage]
+class RepoDetailsRoute extends PageRouteInfo<RepoDetailsRouteArgs> {
+  RepoDetailsRoute({
+    Key? key,
+    required Repo repo,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RepoDetailsRoute.name,
+          args: RepoDetailsRouteArgs(
+            key: key,
+            repo: repo,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RepoDetailsRoute';
+
+  static const PageInfo<RepoDetailsRouteArgs> page =
+      PageInfo<RepoDetailsRouteArgs>(name);
+}
+
+class RepoDetailsRouteArgs {
+  const RepoDetailsRouteArgs({
+    this.key,
+    required this.repo,
+  });
+
+  final Key? key;
+
+  final Repo repo;
+
+  @override
+  String toString() {
+    return 'RepoDetailsRouteArgs{key: $key, repo: $repo}';
+  }
 }
 
 /// generated route for

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../core/shared/extensions.dart';
 import '../domain/repo.dart';
 import 'user_dto.dart';
 
@@ -10,6 +11,10 @@ String _descriptionFromJson(Object? json) {
   return (json as String?) ?? '';
 }
 
+DateTime _updatedAtFromJson(Object json) {
+  return (json as String).toDate();
+}
+
 @freezed
 class RepoDTO with _$RepoDTO {
   const RepoDTO._();
@@ -18,6 +23,8 @@ class RepoDTO with _$RepoDTO {
     required String name,
     @JsonKey(fromJson: _descriptionFromJson) required String description,
     @JsonKey(name: 'stargazers_count') required int stargazersCount,
+    @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+    required DateTime updatedAt,
   }) = _RepoDTO;
 
   factory RepoDTO.fromJson(Map<String, dynamic> json) =>
@@ -29,6 +36,7 @@ class RepoDTO with _$RepoDTO {
       name: name,
       description: description,
       stargazersCount: stargazersCount,
+      updatedAt: updatedAt,
     );
   }
 }

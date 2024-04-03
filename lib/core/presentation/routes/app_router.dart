@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 
+import '../../../repo_details/presentation/repo_details_page.dart';
+import '../../../repos/domain/repo.dart';
 import '../../../repos/presentation/repose_page.dart';
 import '../../../splash/presentation/splash_page.dart';
 
@@ -14,5 +17,6 @@ class AppRouter extends _$AppRouter {
           initial: true,
         ),
         AutoRoute(page: ReposRoute.page, path: "/"),
+        AutoRoute(page: RepoDetailsRoute.page, path: "/details"),
       ];
 }

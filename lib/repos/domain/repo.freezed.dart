@@ -20,6 +20,7 @@ mixin _$Repo {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   int get stargazersCount => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RepoCopyWith<Repo> get copyWith => throw _privateConstructorUsedError;
@@ -30,7 +31,12 @@ abstract class $RepoCopyWith<$Res> {
   factory $RepoCopyWith(Repo value, $Res Function(Repo) then) =
       _$RepoCopyWithImpl<$Res, Repo>;
   @useResult
-  $Res call({User owner, String name, String description, int stargazersCount});
+  $Res call(
+      {User owner,
+      String name,
+      String description,
+      int stargazersCount,
+      DateTime updatedAt});
 
   $UserCopyWith<$Res> get owner;
 }
@@ -52,6 +58,7 @@ class _$RepoCopyWithImpl<$Res, $Val extends Repo>
     Object? name = null,
     Object? description = null,
     Object? stargazersCount = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       owner: null == owner
@@ -70,6 +77,10 @@ class _$RepoCopyWithImpl<$Res, $Val extends Repo>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 
@@ -89,7 +100,12 @@ abstract class _$$RepoImplCopyWith<$Res> implements $RepoCopyWith<$Res> {
       __$$RepoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User owner, String name, String description, int stargazersCount});
+  $Res call(
+      {User owner,
+      String name,
+      String description,
+      int stargazersCount,
+      DateTime updatedAt});
 
   @override
   $UserCopyWith<$Res> get owner;
@@ -109,6 +125,7 @@ class __$$RepoImplCopyWithImpl<$Res>
     Object? name = null,
     Object? description = null,
     Object? stargazersCount = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$RepoImpl(
       owner: null == owner
@@ -127,6 +144,10 @@ class __$$RepoImplCopyWithImpl<$Res>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -138,7 +159,8 @@ class _$RepoImpl extends _Repo {
       {required this.owner,
       required this.name,
       required this.description,
-      required this.stargazersCount})
+      required this.stargazersCount,
+      required this.updatedAt})
       : super._();
 
   @override
@@ -149,10 +171,12 @@ class _$RepoImpl extends _Repo {
   final String description;
   @override
   final int stargazersCount;
+  @override
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'Repo(owner: $owner, name: $name, description: $description, stargazersCount: $stargazersCount)';
+    return 'Repo(owner: $owner, name: $name, description: $description, stargazersCount: $stargazersCount, updatedAt: $updatedAt)';
   }
 
   @override
@@ -165,12 +189,14 @@ class _$RepoImpl extends _Repo {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.stargazersCount, stargazersCount) ||
-                other.stargazersCount == stargazersCount));
+                other.stargazersCount == stargazersCount) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, owner, name, description, stargazersCount);
+  int get hashCode => Object.hash(
+      runtimeType, owner, name, description, stargazersCount, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -184,7 +210,8 @@ abstract class _Repo extends Repo {
       {required final User owner,
       required final String name,
       required final String description,
-      required final int stargazersCount}) = _$RepoImpl;
+      required final int stargazersCount,
+      required final DateTime updatedAt}) = _$RepoImpl;
   const _Repo._() : super._();
 
   @override
@@ -195,6 +222,8 @@ abstract class _Repo extends Repo {
   String get description;
   @override
   int get stargazersCount;
+  @override
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$RepoImplCopyWith<_$RepoImpl> get copyWith =>

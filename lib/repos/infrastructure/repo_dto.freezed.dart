@@ -26,6 +26,8 @@ mixin _$RepoDTO {
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +43,9 @@ abstract class $RepoDTOCopyWith<$Res> {
       {UserDTO owner,
       String name,
       @JsonKey(fromJson: _descriptionFromJson) String description,
-      @JsonKey(name: 'stargazers_count') int stargazersCount});
+      @JsonKey(name: 'stargazers_count') int stargazersCount,
+      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+      DateTime updatedAt});
 
   $UserDTOCopyWith<$Res> get owner;
 }
@@ -63,6 +67,7 @@ class _$RepoDTOCopyWithImpl<$Res, $Val extends RepoDTO>
     Object? name = null,
     Object? description = null,
     Object? stargazersCount = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       owner: null == owner
@@ -81,6 +86,10 @@ class _$RepoDTOCopyWithImpl<$Res, $Val extends RepoDTO>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 
@@ -104,7 +113,9 @@ abstract class _$$RepoDTOImplCopyWith<$Res> implements $RepoDTOCopyWith<$Res> {
       {UserDTO owner,
       String name,
       @JsonKey(fromJson: _descriptionFromJson) String description,
-      @JsonKey(name: 'stargazers_count') int stargazersCount});
+      @JsonKey(name: 'stargazers_count') int stargazersCount,
+      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+      DateTime updatedAt});
 
   @override
   $UserDTOCopyWith<$Res> get owner;
@@ -125,6 +136,7 @@ class __$$RepoDTOImplCopyWithImpl<$Res>
     Object? name = null,
     Object? description = null,
     Object? stargazersCount = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$RepoDTOImpl(
       owner: null == owner
@@ -143,6 +155,10 @@ class __$$RepoDTOImplCopyWithImpl<$Res>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -154,7 +170,9 @@ class _$RepoDTOImpl extends _RepoDTO {
       {required this.owner,
       required this.name,
       @JsonKey(fromJson: _descriptionFromJson) required this.description,
-      @JsonKey(name: 'stargazers_count') required this.stargazersCount})
+      @JsonKey(name: 'stargazers_count') required this.stargazersCount,
+      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+      required this.updatedAt})
       : super._();
 
   factory _$RepoDTOImpl.fromJson(Map<String, dynamic> json) =>
@@ -170,10 +188,13 @@ class _$RepoDTOImpl extends _RepoDTO {
   @override
   @JsonKey(name: 'stargazers_count')
   final int stargazersCount;
+  @override
+  @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'RepoDTO(owner: $owner, name: $name, description: $description, stargazersCount: $stargazersCount)';
+    return 'RepoDTO(owner: $owner, name: $name, description: $description, stargazersCount: $stargazersCount, updatedAt: $updatedAt)';
   }
 
   @override
@@ -186,13 +207,15 @@ class _$RepoDTOImpl extends _RepoDTO {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.stargazersCount, stargazersCount) ||
-                other.stargazersCount == stargazersCount));
+                other.stargazersCount == stargazersCount) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, owner, name, description, stargazersCount);
+  int get hashCode => Object.hash(
+      runtimeType, owner, name, description, stargazersCount, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -214,8 +237,9 @@ abstract class _RepoDTO extends RepoDTO {
       required final String name,
       @JsonKey(fromJson: _descriptionFromJson)
       required final String description,
-      @JsonKey(name: 'stargazers_count')
-      required final int stargazersCount}) = _$RepoDTOImpl;
+      @JsonKey(name: 'stargazers_count') required final int stargazersCount,
+      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+      required final DateTime updatedAt}) = _$RepoDTOImpl;
   const _RepoDTO._() : super._();
 
   factory _RepoDTO.fromJson(Map<String, dynamic> json) = _$RepoDTOImpl.fromJson;
@@ -230,6 +254,9 @@ abstract class _RepoDTO extends RepoDTO {
   @override
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount;
+  @override
+  @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$RepoDTOImplCopyWith<_$RepoDTOImpl> get copyWith =>
