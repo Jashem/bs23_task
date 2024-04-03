@@ -43,13 +43,20 @@ class RepoDetailsPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             8.vGap,
-            Text(
-              "Last updated ${repo.updatedAt.format()}",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: Colors.grey),
-            ),
+            RichText(
+                text: TextSpan(
+              text: repo.updatedAt.format(),
+              style: Theme.of(context).textTheme.bodyLarge,
+              children: [
+                TextSpan(
+                  text: " last updated",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.grey),
+                )
+              ],
+            )),
             16.vGap,
             Row(
               children: [
