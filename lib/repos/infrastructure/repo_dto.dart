@@ -12,7 +12,20 @@ String _descriptionFromJson(Object? json) {
 }
 
 DateTime _updatedAtFromJson(Object json) {
+  if (json is int) {
+    return json.toDate();
+  }
   return (json as String).toDate();
+}
+
+class DateTimeConverter implements JsonConverter<DateTime, Object> {
+  const DateTimeConverter();
+
+  @override
+  DateTime fromJson(Object s) => _updatedAtFromJson(s);
+
+  @override
+  int toJson(DateTime dt) => dt.millisecondsSinceEpoch;
 }
 
 @freezed
@@ -23,7 +36,8 @@ class RepoDTO with _$RepoDTO {
     required String name,
     @JsonKey(fromJson: _descriptionFromJson) required String description,
     @JsonKey(name: 'stargazers_count') required int stargazersCount,
-    @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+    @JsonKey(name: 'updated_at')
+    @DateTimeConverter()
     required DateTime updatedAt,
   }) = _RepoDTO;
 

@@ -26,7 +26,8 @@ mixin _$RepoDTO {
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+  @JsonKey(name: 'updated_at')
+  @DateTimeConverter()
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,8 +45,7 @@ abstract class $RepoDTOCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: _descriptionFromJson) String description,
       @JsonKey(name: 'stargazers_count') int stargazersCount,
-      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
-      DateTime updatedAt});
+      @JsonKey(name: 'updated_at') @DateTimeConverter() DateTime updatedAt});
 
   $UserDTOCopyWith<$Res> get owner;
 }
@@ -114,8 +114,7 @@ abstract class _$$RepoDTOImplCopyWith<$Res> implements $RepoDTOCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: _descriptionFromJson) String description,
       @JsonKey(name: 'stargazers_count') int stargazersCount,
-      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
-      DateTime updatedAt});
+      @JsonKey(name: 'updated_at') @DateTimeConverter() DateTime updatedAt});
 
   @override
   $UserDTOCopyWith<$Res> get owner;
@@ -171,7 +170,8 @@ class _$RepoDTOImpl extends _RepoDTO {
       required this.name,
       @JsonKey(fromJson: _descriptionFromJson) required this.description,
       @JsonKey(name: 'stargazers_count') required this.stargazersCount,
-      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+      @JsonKey(name: 'updated_at')
+      @DateTimeConverter()
       required this.updatedAt})
       : super._();
 
@@ -189,7 +189,8 @@ class _$RepoDTOImpl extends _RepoDTO {
   @JsonKey(name: 'stargazers_count')
   final int stargazersCount;
   @override
-  @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+  @JsonKey(name: 'updated_at')
+  @DateTimeConverter()
   final DateTime updatedAt;
 
   @override
@@ -238,7 +239,8 @@ abstract class _RepoDTO extends RepoDTO {
       @JsonKey(fromJson: _descriptionFromJson)
       required final String description,
       @JsonKey(name: 'stargazers_count') required final int stargazersCount,
-      @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+      @JsonKey(name: 'updated_at')
+      @DateTimeConverter()
       required final DateTime updatedAt}) = _$RepoDTOImpl;
   const _RepoDTO._() : super._();
 
@@ -255,7 +257,8 @@ abstract class _RepoDTO extends RepoDTO {
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount;
   @override
-  @JsonKey(name: 'updated_at', fromJson: _updatedAtFromJson)
+  @JsonKey(name: 'updated_at')
+  @DateTimeConverter()
   DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)

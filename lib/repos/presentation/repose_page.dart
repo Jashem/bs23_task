@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 import '../../core/presentation/no_results_display.dart';
 import '../../core/presentation/pagination_view.dart';
 import '../domain/repo.dart';
@@ -9,6 +10,7 @@ import '../../core/application/paginated_items_notifier.dart';
 import '../shared/providers.dart';
 import 'failure_repo_tile.dart';
 import 'loading_repo_tile.dart';
+import 'no_connection_tile.dart';
 import 'repo_tile.dart';
 
 @RoutePage()
@@ -65,36 +67,43 @@ class _PaginatedListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemCount: state.map(
-        initial: (_) => 0,
-        loadInProgress: (_) => _.items.entity.length + _.itemsPerPage,
-        loadSuccess: (_) => _.items.entity.length,
-        loadFailure: (_) => _.items.entity.length + 1,
-      ),
-      itemBuilder: (contex, index) {
-        return state.map(
-          initial: (_) => RepoTile(repo: _.items.entity[index]),
-          loadInProgress: (_) {
-            if (index < _.items.entity.length) {
-              return RepoTile(repo: _.items.entity[index]);
-            } else {
-              return const LoadingRepoTile();
-            }
-          },
-          loadSuccess: (_) => RepoTile(
-            repo: _.items.entity[index],
+    return Column(
+      children: [
+        if (!state.items.isFresh) const NoConnectionRepoTile(),
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: state.map(
+              initial: (_) => 0,
+              loadInProgress: (_) => _.items.entity.length + _.itemsPerPage,
+              loadSuccess: (_) => _.items.entity.length,
+              loadFailure: (_) => _.items.entity.length + 1,
+            ),
+            itemBuilder: (contex, index) {
+              return state.map(
+                initial: (_) => RepoTile(repo: _.items.entity[index]),
+                loadInProgress: (_) {
+                  if (index < _.items.entity.length) {
+                    return RepoTile(repo: _.items.entity[index]);
+                  } else {
+                    return const LoadingRepoTile();
+                  }
+                },
+                loadSuccess: (_) => RepoTile(
+                  repo: _.items.entity[index],
+                ),
+                loadFailure: (_) {
+                  if (index < _.items.entity.length) {
+                    return RepoTile(repo: _.items.entity[index]);
+                  } else {
+                    return FailureRepoTile(failure: _.failure);
+                  }
+                },
+              );
+            },
           ),
-          loadFailure: (_) {
-            if (index < _.items.entity.length) {
-              return RepoTile(repo: _.items.entity[index]);
-            } else {
-              return FailureRepoTile(failure: _.failure);
-            }
-          },
-        );
-      },
+        ),
+      ],
     );
   }
 }

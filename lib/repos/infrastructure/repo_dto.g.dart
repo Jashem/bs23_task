@@ -12,14 +12,15 @@ _$RepoDTOImpl _$$RepoDTOImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       description: _descriptionFromJson(json['description']),
       stargazersCount: json['stargazers_count'] as int,
-      updatedAt: _updatedAtFromJson(json['updated_at'] as Object),
+      updatedAt:
+          const DateTimeConverter().fromJson(json['updated_at'] as Object),
     );
 
 Map<String, dynamic> _$$RepoDTOImplToJson(_$RepoDTOImpl instance) =>
     <String, dynamic>{
-      'owner': instance.owner,
+      'owner': instance.owner.toJson(),
       'name': instance.name,
       'description': instance.description,
       'stargazers_count': instance.stargazersCount,
-      'updated_at': instance.updatedAt.toIso8601String(),
+      'updated_at': const DateTimeConverter().toJson(instance.updatedAt),
     };

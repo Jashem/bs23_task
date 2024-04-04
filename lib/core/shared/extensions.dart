@@ -8,6 +8,10 @@ extension DateX on String {
   DateTime toDate() => DateTime.parse(this);
 }
 
+extension DateIntX on int {
+  DateTime toDate() => DateTime.fromMillisecondsSinceEpoch(this);
+}
+
 extension DoubleX on String {
   double toDouble() => double.parse(this);
 }

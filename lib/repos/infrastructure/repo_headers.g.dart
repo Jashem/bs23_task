@@ -15,7 +15,7 @@ _$RepoHeadersImpl _$$RepoHeadersImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$RepoHeadersImplToJson(_$RepoHeadersImpl instance) =>
     <String, dynamic>{
-      'link': instance.link,
+      'link': instance.link?.toJson(),
     };
 
 _$PaginationLinkImpl _$$PaginationLinkImplFromJson(Map<String, dynamic> json) =>
