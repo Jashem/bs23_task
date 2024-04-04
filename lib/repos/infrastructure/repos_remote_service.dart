@@ -12,17 +12,20 @@ class ReposRemoteService {
   ReposRemoteService(this._dio);
 
   Future<RemoteResponse<List<RepoDTO>>> getSearchedReposPage(
-    String query,
-    int page,
-  ) async {
+      String query, int page,
+      [String? sort]) async {
     return apiCallWrapper<List<RepoDTO>>(() async {
+      var queryParams = {
+        'q': query,
+        'page': '$page',
+        'per_page': PaginationConfig.itemsPerPage.toString(),
+      };
+      if (sort != null) {
+        queryParams['sort'] = sort;
+      }
       final response = await _dio.get(
         '/search/repositories',
-        queryParameters: {
-          'q': query,
-          'page': '$page',
-          'per_page': PaginationConfig.itemsPerPage.toString(),
-        },
+        queryParameters: queryParams,
       );
       final headers = RepoHeaders.parse(response);
       final convertedData = (response.data["items"] as List)

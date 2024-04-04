@@ -15,12 +15,11 @@ class ReposRepository {
   ReposRepository(this._remoteService, this._localService);
 
   Future<Either<Failure, Fresh<List<Repo>>>> getReposPage(
-    String query,
-    int page,
-  ) async {
+      String query, int page,
+      [String? sort]) async {
     try {
       final remotePageItems =
-          await _remoteService.getSearchedReposPage(query, page);
+          await _remoteService.getSearchedReposPage(query, page, sort);
       return right(
         await remotePageItems.when(
           noConnection: () async => Fresh.no(
@@ -40,5 +39,17 @@ class ReposRepository {
     } on AppException catch (e) {
       return left(Failure(code: e.errorCode, message: e.message));
     }
+  }
+
+  Future<String?> getLastSortValue() async {
+    try {
+      return await _localService.getLastSort();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<void> saveLastSortValue(String value) async {
+    await _localService.saveLastSort(value);
   }
 }

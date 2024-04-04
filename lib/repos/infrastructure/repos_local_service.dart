@@ -45,4 +45,16 @@ class ReposLocalService {
     final repoCount = await store.query().count(_sembastDatabase.instance);
     return (repoCount / PaginationConfig.itemsPerPage).ceil();
   }
+
+  Future<String?> getLastSort() async {
+    final store = StoreRef.main();
+    final sort =
+        await store.record('sort').get(_sembastDatabase.instance) as String?;
+    return sort;
+  }
+
+  Future<void> saveLastSort(String value) async {
+    final store = StoreRef.main();
+    await store.record('sort').put(_sembastDatabase.instance, value);
+  }
 }

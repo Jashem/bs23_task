@@ -7,14 +7,14 @@ class ReposNotifier extends PaginatedItemsNotifier<Repo> {
   static const query = "Flutter";
   ReposRepository get _repository => ref.read(reposRepositoryProvider);
 
-  Future<void> getFirstReposPage() async {
+  Future<void> getFirstReposPage([String? sort]) async {
     super.resetState();
-    await getNextReposPage();
+    await getNextReposPage(sort);
   }
 
-  Future<void> getNextReposPage() async {
+  Future<void> getNextReposPage([String? sort]) async {
     await super.getNextPage(
-      (page) => _repository.getReposPage(query, page),
+      (page) => _repository.getReposPage(query, page, sort),
     );
   }
 }

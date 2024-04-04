@@ -28,7 +28,9 @@ class NoConnectionRepoTile extends ConsumerWidget {
           trailing: IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () {
-              ref.read(reposNotifierProvider.notifier).getFirstReposPage();
+              ref
+                  .read(reposNotifierProvider.notifier)
+                  .getFirstReposPage(ref.read(sortNotifierProvider));
             },
           ),
         ),

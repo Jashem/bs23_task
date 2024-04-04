@@ -34,7 +34,9 @@ class FailureRepoTile extends ConsumerWidget {
           trailing: IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () {
-              ref.read(reposNotifierProvider.notifier).getNextReposPage();
+              ref
+                  .read(reposNotifierProvider.notifier)
+                  .getNextReposPage(ref.read(sortNotifierProvider));
             },
           ),
         ),
